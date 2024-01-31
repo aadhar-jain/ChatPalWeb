@@ -1,0 +1,654 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier Prime', monospace;
+    box-sizing: border-box;
+    color: white;
+}
+button, a, input {
+    -webkit-tap-highlight-color: transparent;
+}
+html,
+body {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    position: relative;
+    background-image: url(./assets/bodyBg.webp);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    position: absolute;
+    /* this is for video */
+    width: 100%;
+    height: 100%;
+}
+
+video {
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.overlay {
+    position: absolute;
+    width: inherit;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.661);
+
+}
+
+nav {
+    position: absolute;
+    width: inherit;
+    height: 120px;
+    display: flex;
+}
+
+.nav_left,
+.nav_right {
+    width: 50%;
+    display: flex;
+    position: relative;
+}
+
+.nav_right {
+    align-items: center;
+    font-weight: bold;
+    color: transparent;
+}
+
+.nav_right ul {
+    list-style-type: none;
+    display: flex;
+    gap: 70px;
+    align-items: center;
+    position: absolute;
+    right: 18%;
+}
+
+#home_btn {
+    background-color: white;
+    color: black;
+    padding: 12px 15px;
+    border-radius: 15px;
+    font-family: monospace, 'Courier New', Courier;
+    cursor: pointer;
+}
+
+#home_btn:hover {
+    background-color: chartreuse;
+}
+
+.logo {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    left: 12%;
+    background-color: rgba(0, 0, 0, 0.398);
+    border-radius: 50px;
+}
+
+.logo h1 {
+    font-size: 42px;
+}
+
+.logo h4,
+.logo h1 {
+    position: relative;
+}
+
+.logo h4 {
+    font-family: monospace, 'Courier New', Courier;
+    font-weight: 1;
+    bottom: 20%;
+}
+
+#themeBtn {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+#themeBtn img {
+    height: 30px;
+    cursor: pointer;
+    position: relative;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    top: 110px;
+    background-color: rgba(0, 0, 0, 0.398);
+}
+
+.button_box {
+    border-radius: 12px;
+    width: 200px;
+    position: relative;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn {
+    left: 0;
+    top: 0;
+    display: flex;
+    position: absolute;
+    width: 105px;
+    height: 100%;
+    background-color: chartreuse;
+    border-radius: 12px;
+    transition: 0.5s ease-in-out;
+}
+
+.toggle-btn {
+    width: 50%;
+    font-family: 'Fira Code', 'Roboto Mono', monospace;
+    cursor: pointer;
+    text-align: center;
+    outline-style: none;
+    border: 0;
+    background-color: transparent;
+    font-weight: bolder;
+    z-index: 2;
+}
+
+#encryptBtn {
+    color: black;
+    transition: 0.4s ease-in;
+}
+
+#decryptBtn {
+    color: white;
+    transition: 0.4s ease-in;
+}
+
+.hero {
+    position: absolute;
+    top: 150px;
+    width: 100vw;
+    display: flex;
+    height: calc(100% - 142px + 50px);
+}
+
+.social {
+    height: inherit;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    left: 18px;
+}
+
+.social img {
+    width: 35px;
+}
+
+.linkedin:hover {
+    content: url("./assets/social/linkedin_live.webp");
+}
+
+.instagram:hover {
+    content: url("./assets/social/instagram_live.webp");
+}
+
+.github:hover {
+    content: url("./assets/social/github_live.webp");
+}
+
+.left_hero,
+.right_hero {
+    width: 50%;
+    height: inherit;
+    display: flex;
+}
+
+.left_text,
+.right_text {
+    top: 5%;
+    position: relative;
+    height: 95%;
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0.4px 0.4px 12px rgb(183, 182, 182);
+}
+
+.left_text {
+    left: 16%;
+}
+
+.right_text {
+    left: 4.5%;
+}
+
+
+textarea {
+    position: absolute;
+    resize: none;
+    width: 100%;
+    height: 100%;
+    color: chartreuse;
+    padding: 4%;
+    padding-right: 8%;
+    font-size: medium;
+    background: transparent;
+    border: none;
+    outline: none;
+
+}
+
+::placeholder {
+    color: rgba(255, 255, 255, 0.597);
+}
+
+.run {
+    position: absolute;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.runDiv{
+    position: absolute;
+    width: 4%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 48.1%;
+    top: 40%; 
+}
+.run img {
+    width: 30px;
+}
+
+.copy {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 6%;
+    right: 9%;
+}
+
+.copy img {
+    width: 20px;
+}
+
+
+
+/* css related to logics in js */
+.hidden {
+    opacity: 0;
+    transition: 0.5s ease-in;
+    pointer-events: none;
+}
+
+.show {
+    opacity: 1;
+    transition: 1.5s ease-out;
+}
+
+.dialog-box {
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    right: -50%;
+    padding: 1px;
+    font-size: smaller;
+    color: black;
+    background-color: rgba(245, 222, 179, 0.505);
+    z-index: 4;
+}
+
+#themeBtn:hover+.dialog-box {
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 1140px) {
+    .social img {
+        width: 25px;
+    }
+
+    .left_text {
+        left: 14%;
+    }
+
+    .copy {
+        right: 6.8%;
+    }
+
+    .right_text {
+        left: 8%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .hero {
+        top: 120px;
+    }
+
+    .social img {
+        width: 20px;
+    }
+
+    .logo h1 {
+        font-size: 30px;
+    }
+
+    .copy {
+        right: 6.8%;
+    }
+
+    .logo h4 {
+        font-size: 11px;
+    }
+
+    #home_btn {
+        padding: 8px 10px;
+        font-size: 12px;
+        border-radius: 13px;
+    }
+
+    #themeBtn img {
+        height: 20px;
+    }
+
+    nav {
+        height: 80px;
+    }
+
+    .header {
+        top: 80px;
+    }
+
+    .button_box {
+        height: 25px;
+        width: 160px;
+    }
+
+    .btn {
+        width: 80px;
+    }
+
+    .button_box button {
+        font-size: 10px;
+    }
+
+    .run img {
+        width: 20px;
+    }
+
+    .copy img {
+        width: 15px;
+    }
+
+    textarea {
+        font-size: x-small;
+    }
+}
+
+@media (max-width: 800px) {
+    .left_text {
+        left: 14%;
+    }
+
+    .right_text {
+        left: 8%;
+    }
+
+    .copy {
+        right: 8.7%;
+
+    }
+
+    .copy img {
+        width: 15px;
+    }
+
+    .left_text {
+        left: 16%;
+    }
+
+    .right_text {
+        left: 4.2%;
+
+    }
+
+}
+
+@media (max-width: 680px) {
+    .social img {
+        width: 15px;
+    }
+
+    .run img {
+        width: 16px;
+    }
+
+    .nav_right ul {
+        gap: 50px;
+    }
+
+    #home_btn {
+        font-size: 10px;
+    }
+
+    .social {
+        left: 2%;
+    }
+
+}
+
+@media (max-width : 550px) {
+    .button_box {
+        height: 20px;
+        width: 140px;
+    }
+
+    .btn {
+        width: 70px;
+    }
+
+    .button_box button {
+        font-size: 8px;
+    }
+
+
+    .hero {
+        flex-direction: column;
+        align-items: center;
+        height: 69%;
+        gap: 7%;
+        top: 110px;
+    }
+
+    .left_hero,
+    .right_hero {
+        width: 100%;
+        height: 50%;
+    }
+
+    .left_text {
+        left: 10%;
+    }
+
+    .right_text {
+        left: 10%;
+    }
+
+    .social {
+        top: 20%;
+    }
+
+    .copy {
+        top: 58%;
+        right: 11.5%;
+    }
+
+    .copy img {
+        width: 12px;
+    }
+
+    .run img {
+        width: 14px;
+    }
+    .runDiv{
+        top: 47%;
+    }
+}
+
+@media (max-height:480px) and (min-width: 551px) {
+    .hero {
+        height: 78%;
+    }
+
+    .runDiv {
+        top: 45%;
+    }
+}
+
+@media (max-height:350px) and (min-width: 551px) {
+    .hero {
+        height: 77%;
+    }
+
+}
+
+@media (max-height:320px) and (min-width: 551px) {
+    .hero {
+        height: 73%;
+    }
+
+    .runDiv {
+        top: 42%;
+    }
+
+}
+@media (max-height:270px) and (min-width: 551px) {
+    .header{
+        top: 60px;
+    }
+    .hero{
+        top: 100px;
+    }
+    .social img{
+        width: 15px;
+    }
+}
+
+@media (max-height:400px) and (min-width: 1000px) {
+    .social img {
+        width: 27px;
+    }
+
+    .hero {
+        height: 70%;
+    }
+
+}
+
+@media (max-height:1000px) and (max-width: 550px) {
+    .run img{
+        transform: rotate(90deg);
+
+    }
+    .header{
+        top: 120px;
+    }
+    .hero{
+        top: 160px;
+        height: 75%;
+    }
+    .runDiv img{
+        width: 24px;
+
+    }
+    
+    textarea{
+        font-size: 15px;
+    }
+    .copy img{
+        width: 18px;
+    }
+    .copy{
+        right: 12.5%;
+    }
+    .social{
+        flex-direction: row;
+        width: 100%;
+        top: 103%;
+        left: 0;
+    }
+    .social img{
+        width: 20px;
+    }
+    .nav{
+        height: 140px;
+        
+    }
+    .nav_right ul{
+        gap: 35px;
+    }
+
+}
+
+@media (max-height:850px) and (max-width: 550px){
+
+    .hero{
+        height: 72%;
+        
+
+    }
+    .social{
+        top: 104%;
+    }
+}
+@media (max-height:750px) and (max-width: 550px){
+
+    .hero{
+        height: 70%;
+    }
+}
+@media (max-height:700px) and (max-width: 550px){
+
+    .hero{
+        height: 68%;
+    }
+}

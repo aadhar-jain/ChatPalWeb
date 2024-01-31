@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&family=Roboto+Mono:wght@300&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <div class="container">
+        <video id="backVid" width="100" height="100" loop autoplay muted
+            src="assets/bgVideo.mp4"></video>
+        <div class="overlay"></div>
+        <nav>
+            <div class="nav_left">
+                <div class="logo">
+                    <a href="./index.html">
+                        <h1>ChatPal</h1>
+                    </a>
+                    <a href="./index.html">
+                        <h4>Texting Made Secure</h4>
+                    </a>
+                </div>
+            </div>
+            <div class="nav_right">
+                <ul>
+                    <a href="./index.html">
+                        <li id="home_btn">Home</li>
+                    </a>
+                    <button onclick="toggleMode()" id="themeBtn"><img class="themeImg"
+                            src="./assets/buttons/light_mode.webp" alt="changeTheme"> </button>
+                    <div class="dialog-box">switch to<br>light-mode</div>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="header">
+            <div class="button_box">
+                <div class="btn"></div>
+                <button type="button" onclick="encrypt()" id="encryptBtn" class="toggle-btn">ENCRYPT</button>
+                <button type="button" onclick="decrypt()" id="decryptBtn" class="toggle-btn">DECRYPT</button>
+            </div>
+        </div>
+
+        <div class="hero">
+
+            <div class="social">
+                <a href="https://www.linkedin.com/in/aadhar-j/"><img class="linkedin" src="./assets/social/linkedin.webp"
+                        alt="linkedin"></a>
+                <a href="https://www.instagram.com/__jain.aadhar_/?hl=en"><img class="instagram"
+                        src="./assets/social/instagram.webp" alt="instagram"></a>
+                <a href="https://github.com/aadhar-jain"><img class="github" src="./assets/social/github.webp"
+                        alt="github"></a>
+            </div>
+
+
+            <div class="left_hero">
+                <div class="left_text">
+                    <textarea oninput="wipeoutputArea(1)" placeholder="Enter text to encrypt" name=""
+                        class="inputArea1 show" id="textArea1" cols="30" rows="100"></textarea>
+
+                    <textarea oninput="wipeoutputArea(2)" placeholder="Paste encryption here..." name=""
+                        class="inputArea2 hidden " id="textArea2" cols="30" rows="100"></textarea>
+                </div>
+            </div>
+
+
+            <div class="right_hero">
+                <div class="right_text">
+                    <textarea readonly placeholder="Encryption will be visible here..." name="" class="outputArea1 show"
+                        id="textArea3" cols="30" rows="100"></textarea>
+
+                    <textarea readonly placeholder="Text will be visible here" name="" class="outputArea2 hidden "
+                        id="textArea4" cols="30" rows="100"></textarea>
+                </div>
+
+                <button onclick="copyToClipboard(1)" id="copyEncrypt" class="copy copy1"><img id="copyEncryptImg"
+                        class="copy1 copyBtnImg1" src="./assets/buttons/copy.webp" alt=""></button>
+                <!--displayed when encrypt-->
+
+                <button onclick="copyToClipboard(2)" id="copyDecrypt" class="copy copy2 hidden"><img id="copyDecryptImg"
+                        class="copy2 copyBtnImg2" src="./assets/buttons/copy.webp" alt=""></button>
+                <!--displayed when decrypt-->
+
+
+
+            </div>
+
+            <div class="runDiv">
+
+                <button type="button" onclick="getFromTextAreaEncrypt()" class="run run1 runEncrypt"><img
+                        class="runBtn1 run1 " src="./assets/buttons/run.webp" alt=""></button>
+                <!--displayed when encrypt-->
+
+                <button type="button" onclick="getFromTextAreaDecrypt()" class="run run2 runDecrypt hidden"><img
+                        class="runBtn2 run2" src="./assets/buttons/run.webp" alt=""></button>
+                <!--displayed when decrypt-->
+
+            </div>
+
+
+        </div>
+
+    </div>
+    <script type="module" src="./scripts/encryptionScripts/logic1.js"></script>
+    <script type="module" src="./scripts/encryptionScripts/logic2.js"></script>
+    <script type="module" src="./scripts/encryptionScripts/logic3.js"></script>
+    <script type="module" src="./scripts/encryptionScripts/logic4.js"></script>
+    <script type="module" src="./scripts/encryptionScripts/encrypt.js"></script>
+    <script type="module" src="./scripts/decryptionScripts/decrypt.js"></script>
+    <script type="module" src="./scripts/decryptionScripts/logic1.js"></script>
+    <script type="module" src="./scripts/decryptionScripts/logic2.js"></script>
+    <script type="module" src="./scripts/decryptionScripts/logic3.js"></script>
+    <script type="module" src="./scripts/decryptionScripts/logic4.js"></script>
+
+    <script>
+
+        //to make video seamless
+        const vid = document.querySelector("video");
+        vid.addEventListener("timeupdate", (e) => {
+            if (e.target.currentTime >= 35) {
+                e.target.currentTime = 0.0;
+            }
+        });
+
+        // MANIPULATING THE VISIBILITY OF ALL BUTTONS AND TEXTAREAS ON CLICK OF ENCRYPT OR DECRYPT
+        let btnSlider = document.querySelector('.btn');
+        let textArea1 = document.querySelector('#textArea1');
+        let textArea2 = document.querySelector('#textArea2');
+        let textArea3 = document.querySelector('#textArea3');
+        let textArea4 = document.querySelector('#textArea4');
+        let copy1 = document.querySelector('.copy1');
+        let copy2 = document.querySelector('.copy2');
+        let run1 = document.querySelector('.run1');
+        let run2 = document.querySelector('.run2');
+
+        //remove event listeners on moving to mobile devices
+        if (window.matchMedia('(max-width: 550px)').matches) {
+            // Remove event listeners for small screens
+            document.querySelector('.dialog-box').style.display = 'none';
+        }
+        else{
+            document.querySelector('.dialog-box').style.display = 'block';
+        }
+
+        function encrypt() {
+            //1 and 3 wil be displayed 
+            textArea1.classList.remove("hidden"); textArea1.classList.add("show");
+            textArea2.classList.add("hidden"); textArea2.classList.remove("show");
+            textArea3.classList.remove("hidden"); textArea3.classList.add("show");
+            textArea4.classList.add("hidden"); textArea4.classList.remove("show");
+
+            copy1.classList.remove("hidden");
+            copy2.classList.add("hidden");
+            run1.classList.remove("hidden");
+            run2.classList.add("hidden");
+
+            document.getElementById("encryptBtn").style.color = "black";
+            document.getElementById("decryptBtn").style.color = "white";
+
+
+            btnSlider.style.left = '0';
+        }
+        function decrypt() {
+            //2 and 4 wil be displayed  
+            textArea1.classList.add("hidden"); textArea1.classList.remove("show");
+            textArea2.classList.remove("hidden"); textArea2.classList.add("show");
+            textArea3.classList.add("hidden"); textArea3.classList.remove("show");
+            textArea4.classList.remove("hidden"); textArea4.classList.add("show");
+
+            copy1.classList.add("hidden");
+            copy2.classList.remove("hidden");
+            run1.classList.add("hidden");
+            run2.classList.remove("hidden");
+
+            document.getElementById("encryptBtn").style.color = "white";
+            document.getElementById("decryptBtn").style.color = "black";
+
+            //media query handling
+            if (window.innerWidth <= 550) {
+                btnSlider.style.left = '70px';
+                return;
+            }
+            //media query handling
+            if (window.innerWidth <= 1000) {
+                btnSlider.style.left = '80px';
+                return;
+            }
+
+            btnSlider.style.left = '95.5px';
+        }
+
+
+        //as soon as something is written in plain-textArea , cipher-textArea should be resetted
+        function wipeoutputArea(val) {
+            document.querySelector(`.outputArea${val}`).value = "";     //val specify which outputArea to wipe
+        }
+
+        //adding copy to clipboard button functionality
+        async function copyToClipboard(val) {
+            const cipher_text_area = document.querySelector(`.outputArea${val}`);
+            if (cipher_text_area.value.length == 0) return;
+
+            //getting the img element in button and changing img src to tick image
+            const btnImg = document.querySelector(`.copyBtnImg${val}`);
+            const origSrc = btnImg.src;
+            btnImg.src = "./assets/buttons/tick.webp";
+
+            // Temporarily remove readonly attribute to enable copying
+            cipher_text_area.removeAttribute("readonly");
+
+            // Select the text in the cipher_text_area
+            cipher_text_area.select();
+
+            // Copy the selected text to the clipboard
+            document.execCommand("copy");
+
+            // Clear the selection to unselect the text
+            window.getSelection().removeAllRanges();
+
+            // Reapply readonly attribute after copying
+            cipher_text_area.setAttribute("readonly", true);
+
+            //resetting img src to original value before returning after a delay of 1sec
+            await new Promise(resolve => setTimeout(resolve, 500));
+            btnImg.src = origSrc;
+        }
+
+        //defining toggle mode function to toggle between light and dark mode
+        async function toggleMode() {
+            const lightImgSrc = 'assets/buttons/light_mode.webp';
+            const darkImgSrc = 'assets/buttons/dark_mode.webp';
+            const themeImg = document.querySelector('.themeImg');
+            const themeImgSrc = themeImg.src;
+
+            //getting all elements whose theme will be changed
+            let home_btn = document.getElementById("home_btn");
+            let encryptBtn = document.getElementById("encryptBtn");
+            let decryptBtn = document.getElementById("decryptBtn");
+            let linkedin = document.querySelector('.linkedin');
+            let instagram = document.querySelector('.instagram');
+            let github = document.querySelector('.github');
+            let video = document.getElementById("backVid");
+            let overlay = document.querySelector('.overlay');
+            let logo = document.querySelector('.logo');
+            let header = document.querySelector('.header'); const clr = logo.style.backgroundColor;
+            let dialogBox = document.querySelector('.dialog-box');
+            let left_text = document.querySelector('.left_text');
+            let right_text = document.querySelector('.right_text');
+            let button_box = document.querySelector('.button_box');
+            // rest buttons are already accessible from above
+
+            home_btn.addEventListener('mouseover', function () {
+                this.style.backgroundColor = 'chartreuse';
+                this.style.color = 'black';
+            });
+
+            //social media icons hover
+            linkedin.addEventListener('mouseover', function () {
+                this.src = "assets/social/linkedin_live.webp";
+            });
+            instagram.addEventListener('mouseover', function () {
+                this.src = "assets/social/instagram_live.webp";
+            });
+            github.addEventListener('mouseover', function () {
+                this.src = "assets/social/github_live.webp";
+            });
+
+            if (themeImgSrc.includes(lightImgSrc)) {
+                //go to light_mode
+                document.body.style.backgroundImage = 'none';
+                document.body.style.backgroundColor = 'white';
+                video.style.display = 'none';
+                overlay.style.display = 'none';
+                logo.style.background = 'none';
+                header.style.background = 'none';
+                logo.querySelector('h1').style.color = 'black';
+                logo.querySelector('h4').style.color = 'black';
+                home_btn.style.backgroundColor = 'black';
+                home_btn.style.color = 'white';
+
+                //for managing hover effect
+                home_btn.addEventListener('mouseout', function () {
+                    this.style.backgroundColor = 'black';
+                    this.style.color = 'white';
+                });
+
+                dialogBox.innerHTML = "switch to<br>dark-mode";
+                dialogBox.style.backgroundColor = "black";
+                dialogBox.style.color = "white";
+
+                //changing social media icons
+                linkedin.src = "assets/social/linkedin_light.webp";
+                linkedin.addEventListener('mouseout', function () {
+                    this.src = "assets/social/linkedin_light.webp";
+                });
+                ///////////////////////////////////////////////////
+                instagram.src = "assets/social/instagram_light.webp";
+                instagram.addEventListener('mouseout', function () {
+                    this.src = "assets/social/instagram_light.webp";
+                });
+                ////////////////////////////////////////////////////            
+                github.src = "assets/social/github_light.webp";
+                github.addEventListener('mouseout', function () {
+                    this.src = "assets/social/github_light.webp";
+                });
+
+                ////////////////////////////////////////////////////
+                document.querySelector('.runBtn1').src = "./assets/buttons/run_light.webp"
+                document.querySelector('.runBtn2').src = "./assets/buttons/run_light.webp"
+                document.querySelector('.runBtn1').addEventListener('mouseout', function () {
+                    this.src = "assets/buttons/run_light.webp";
+                });
+                document.querySelector('.runBtn2').addEventListener('mouseout', function () {
+                    this.src = "assets/buttons/run_light.webp";
+                });
+
+                // //changing colors for textbox by targetting left_text and right_text (divs beneath textareas)
+                left_text.style.backgroundColor = 'rgba(0, 0, 0, 0.756)';
+                right_text.style.backgroundColor = 'rgba(0, 0, 0, 0.756)';
+
+                button_box.style.backgroundColor = 'black';
+                themeImg.src = darkImgSrc;      //setting the display icon on navbar
+            }
+            else if (themeImgSrc.includes(darkImgSrc)) {
+                //go to dark mode
+                document.body.style.backgroundImage = 'url("/assets/bodyBg.webp")'
+                document.body.style.backgroundColor = '';
+                video.style.display = 'block';
+                overlay.style.display = 'block';
+                logo.style.background = clr;
+                header.style.background = clr;
+                logo.querySelector('h1').style.color = 'white';
+                logo.querySelector('h4').style.color = 'white';
+                home_btn.style.backgroundColor = 'white';
+                home_btn.style.color = 'black';
+
+                //for managing hover effect
+                home_btn.addEventListener('mouseout', function () {
+                    this.style.backgroundColor = 'white';
+                    this.style.color = 'black';
+                });
+
+                dialogBox.innerHTML = "switch to<br>light-mode";
+                dialogBox.style.backgroundColor = "rgba(245, 222, 179, 0.505)";
+                dialogBox.style.color = "black";
+
+                //changing social media icons
+                linkedin.src = "assets/social/linkedin.webp";
+                linkedin.addEventListener('mouseout', function () {
+                    this.src = "assets/social/linkedin.webp";
+                });
+                /////////////////////////////////////////////////////
+                instagram.src = "assets/social/instagram.webp";
+                instagram.addEventListener('mouseout', function () {
+                    this.src = "assets/social/instagram.webp";
+                });
+                /////////////////////////////////////////////////////            
+                github.src = "assets/social/github.webp";
+                github.addEventListener('mouseout', function () {
+                    this.src = "assets/social/github.webp";
+                });
+
+                ////////////////////////////////////////////////////
+                document.querySelector('.runBtn1').src = "./assets/buttons/run.webp"
+                document.querySelector('.runBtn2').src = "./assets/buttons/run.webp"
+                document.querySelector('.runBtn1').addEventListener('mouseout', function () {
+                    this.src = "assets/buttons/run.webp";
+                });
+                document.querySelector('.runBtn2').addEventListener('mouseout', function () {
+                    this.src = "assets/buttons/run.webp";
+                });
+
+                // //changing colors for textbox by targetting left_text and right_text (divs beneath textareas)
+                left_text.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+                right_text.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
+
+                button_box.style.backgroundColor = 'transparent';
+                themeImg.src = lightImgSrc;     //setting the display icon on navbar
+            }
+
+
+        }
+    </script>
+    <script>
+        document.querySelector('.runBtn1').addEventListener('mouseover', function () {
+            this.src = "assets/buttons/run_live.webp";
+        });
+        document.querySelector('.runBtn2').addEventListener('mouseover', function () {
+            this.src = "assets/buttons/run_live.webp";
+        });
+        document.querySelector('.runBtn1').addEventListener('mouseout', function () {
+            this.src = "assets/buttons/run.webp";
+        });
+        document.querySelector('.runBtn2').addEventListener('mouseout', function () {
+            this.src = "assets/buttons/run.webp";
+        });
+
+    </script>
+</body>
+
+</html>
