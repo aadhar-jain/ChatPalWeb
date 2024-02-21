@@ -25,7 +25,6 @@ body {
     overflow-x: hidden;
     overflow-y: hidden;
 }
-
 a {
     text-decoration: none;
 }
@@ -143,11 +142,11 @@ nav {
     display: flex;
     justify-content: center;
     top: 110px;
-    background-color: rgba(0, 0, 0, 0.398);
+    /* background-color: rgba(0, 0, 0, 0.398); */
 }
 
 .button_box {
-    border-radius: 12px;
+    border-radius: 15px;
     width: 200px;
     position: relative;
     height: 30px;
@@ -256,6 +255,7 @@ textarea {
     height: 100%;
     color: chartreuse;
     padding: 4%;
+    padding-top: 5%;
     padding-right: 8%;
     font-size: medium;
     background: transparent;
@@ -298,9 +298,18 @@ textarea {
 }
 
 .copy img {
-    width: 20px;
+    width: 17px;
+    position: relative;
+    right: 170%;
+    opacity: 0.7;
 }
-
+.copy span{
+    position: absolute;
+    top: 10%;
+    left: -50%;
+    font-size: small;
+    opacity: 0.7;
+}
 
 
 /* css related to logics in js */
@@ -351,7 +360,7 @@ textarea {
     }
 
     .copy {
-        right: 6.8%;
+        right: 7.5%;
     }
 
     .right_text {
@@ -373,7 +382,13 @@ textarea {
     }
 
     .copy {
-        right: 6.8%;
+        right: 7.5%;
+    }
+    .copy img{
+        width: 12px;
+    }
+    .copy span{
+        font-size: 9px;
     }
 
     .logo h4 {
@@ -415,9 +430,6 @@ textarea {
         width: 20px;
     }
 
-    .copy img {
-        width: 15px;
-    }
 
     textarea {
         font-size: x-small;
@@ -434,13 +446,10 @@ textarea {
     }
 
     .copy {
-        right: 8.7%;
+        right: 9.5%;
 
     }
 
-    .copy img {
-        width: 15px;
-    }
 
     .left_text {
         left: 16%;
@@ -478,16 +487,16 @@ textarea {
 
 @media (max-width : 550px) {
     .button_box {
-        height: 20px;
+        height: 28px;
         width: 140px;
     }
 
     .btn {
-        width: 70px;
+        width: 71px;
     }
 
     .button_box button {
-        font-size: 8px;
+        font-size: 10px;
     }
 
 
@@ -605,10 +614,13 @@ textarea {
         font-size: 15px;
     }
     .copy img{
-        width: 18px;
+        width: 15px;
     }
     .copy{
         right: 12.5%;
+    }
+    .copy span{
+        top: 12%;
     }
     .social{
         flex-direction: row;
@@ -633,12 +645,11 @@ textarea {
 
     .hero{
         height: 72%;
-        
-
     }
     .social{
         top: 104%;
     }
+ 
 }
 @media (max-height:750px) and (max-width: 550px){
 
@@ -651,4 +662,5 @@ textarea {
     .hero{
         height: 68%;
     }
+
 }

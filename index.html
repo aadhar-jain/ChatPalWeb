@@ -16,9 +16,9 @@
 </head>
 
 <body>
+    <div id="infoBox"></div>
     <div class="container">
-        <video id="backVid" width="100" height="100" loop autoplay muted
-            src="assets/bgVideo.mp4"></video>
+        <video id="backVid" width="100" height="100" loop autoplay muted src="assets/bgVideo.mp4"></video>
         <div class="overlay"></div>
         <nav>
             <div class="nav_left">
@@ -33,8 +33,8 @@
             </div>
             <div class="nav_right">
                 <ul>
-                    <a href="./index.html">
-                        <li id="home_btn">Home</li>
+                    <a href="https://github.com/aadhar-jain">
+                        <li id="home_btn">About Me</li>
                     </a>
                     <button onclick="toggleMode()" id="themeBtn"><img class="themeImg"
                             src="./assets/buttons/light_mode.webp" alt="changeTheme"> </button>
@@ -54,8 +54,8 @@
         <div class="hero">
 
             <div class="social">
-                <a href="https://www.linkedin.com/in/aadhar-j/"><img class="linkedin" src="./assets/social/linkedin.webp"
-                        alt="linkedin"></a>
+                <a href="https://www.linkedin.com/in/aadhar-j/"><img class="linkedin"
+                        src="./assets/social/linkedin.webp" alt="linkedin"></a>
                 <a href="https://www.instagram.com/__jain.aadhar_/?hl=en"><img class="instagram"
                         src="./assets/social/instagram.webp" alt="instagram"></a>
                 <a href="https://github.com/aadhar-jain"><img class="github" src="./assets/social/github.webp"
@@ -83,11 +83,11 @@
                         id="textArea4" cols="30" rows="100"></textarea>
                 </div>
 
-                <button onclick="copyToClipboard(1)" id="copyEncrypt" class="copy copy1"><img id="copyEncryptImg"
-                        class="copy1 copyBtnImg1" src="./assets/buttons/copy.webp" alt=""></button>
+                <button onclick="copyToClipboard(1)" id="copyEncrypt" class="copy copy1"><span class="span">Copy</span><img id="copyEncryptImg"
+                         class="copy1 copyBtnImg1" src="./assets/buttons/copy.webp" alt=""></button>
                 <!--displayed when encrypt-->
 
-                <button onclick="copyToClipboard(2)" id="copyDecrypt" class="copy copy2 hidden"><img id="copyDecryptImg"
+                <button onclick="copyToClipboard(2)" id="copyDecrypt" class="copy copy2 hidden"><span class="span">Copy</span><img id="copyDecryptImg"
                         class="copy2 copyBtnImg2" src="./assets/buttons/copy.webp" alt=""></button>
                 <!--displayed when decrypt-->
 
@@ -98,11 +98,11 @@
             <div class="runDiv">
 
                 <button type="button" onclick="getFromTextAreaEncrypt()" class="run run1 runEncrypt"><img
-                        class="runBtn1 run1 " src="./assets/buttons/run.webp" alt=""></button>
+                        title="Encrypt" class="runBtn1 run1 " src="./assets/buttons/run.webp" alt=""></button>
                 <!--displayed when encrypt-->
 
                 <button type="button" onclick="getFromTextAreaDecrypt()" class="run run2 runDecrypt hidden"><img
-                        class="runBtn2 run2" src="./assets/buttons/run.webp" alt=""></button>
+                        title="Decrypt" class="runBtn2 run2" src="./assets/buttons/run.webp" alt=""></button>
                 <!--displayed when decrypt-->
 
             </div>
@@ -111,6 +111,33 @@
         </div>
 
     </div>
+    <script>    //for dialog box
+        document.addEventListener('DOMContentLoaded', function () {
+            const infoBox = document.getElementById('infoBox');
+
+            image.addEventListener('mouseover', function (event) {
+                const elementText = event.target.getAttribute('title');
+                showInfoBox(elementText, event.clientX, event.clientY);
+            });
+
+            image.addEventListener('mouseout', function () {
+                hideInfoBox();
+            });
+
+            function showInfoBox(text, x, y) {
+                infoBox.innerText = text;
+                infoBox.style.left = x + 'px';
+                infoBox.style.top = y + 'px';
+                infoBox.style.display = 'block';
+            }
+
+            function hideInfoBox() {
+                infoBox.style.display = 'none';
+            }
+        });
+
+    </script>
+
     <script type="module" src="./scripts/encryptionScripts/logic1.js"></script>
     <script type="module" src="./scripts/encryptionScripts/logic2.js"></script>
     <script type="module" src="./scripts/encryptionScripts/logic3.js"></script>
@@ -148,7 +175,7 @@
             // Remove event listeners for small screens
             document.querySelector('.dialog-box').style.display = 'none';
         }
-        else{
+        else {
             document.querySelector('.dialog-box').style.display = 'block';
         }
 
@@ -187,7 +214,7 @@
 
             //media query handling
             if (window.innerWidth <= 550) {
-                btnSlider.style.left = '70px';
+                btnSlider.style.left = '69px';
                 return;
             }
             //media query handling
@@ -214,6 +241,7 @@
             const btnImg = document.querySelector(`.copyBtnImg${val}`);
             const origSrc = btnImg.src;
             btnImg.src = "./assets/buttons/tick.webp";
+            //hide copy text
 
             // Temporarily remove readonly attribute to enable copying
             cipher_text_area.removeAttribute("readonly");
